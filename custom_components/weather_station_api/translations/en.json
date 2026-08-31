@@ -1,0 +1,57 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to a station-data source",
+        "description": "Point Home Assistant at an HTTP endpoint that returns the documented station-data JSON schema. Any server that speaks that schema works — this integration is not tied to a specific weather-station brand or region.",
+        "data": {
+          "url": "URL",
+          "scan_interval": "Refresh interval (seconds)"
+        },
+        "data_description": {
+          "url": "The exact endpoint that returns the station JSON, e.g. {example_url}. Nothing is appended to it.",
+          "scan_interval": "How often to fetch fresh data. The default of 1800 (30 minutes) matches how often most sources update; lower values just poll a cache more often."
+        }
+      },
+      "stations": {
+        "title": "Select stations",
+        "description": "These stations are being reported by the server right now. Pick the ones to add to Home Assistant — each becomes one device with up to six sensors (temperature, humidity, pressure, wind, solar, rain) and one weather entity. You can change this selection later from the integration's Configure button, without removing it.",
+        "data": {
+          "stations": "Stations"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach the service at that URL. Check the address, that the server is running, and that Home Assistant can reach it. Your entries below have been kept.",
+      "no_stations": "Connected to the URL, but the response contained no stations. Make sure it points at the station-data endpoint and returns the documented schema."
+    },
+    "abort": {
+      "already_configured": "This URL is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Add or remove stations",
+        "description": "This list is re-fetched live from your server. Change which stations have entities, then submit — the integration reloads to apply it. Entities for a removed station go unavailable rather than being deleted, and come back if you re-add it.",
+        "data": {
+          "stations": "Stations"
+        }
+      }
+    },
+    "abort": {
+      "cannot_connect": "Could not reach the service at the configured URL to load the station list.",
+      "no_stations": "The service returned no stations."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "temperature": { "name": "Temperature" },
+      "humidity": { "name": "Humidity" },
+      "pressure": { "name": "Pressure" },
+      "wind": { "name": "Wind" },
+      "solar": { "name": "Solar" },
+      "rain": { "name": "Rain" }
+    }
+  }
+}

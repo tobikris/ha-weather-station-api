@@ -1,0 +1,57 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Mit einer Wetterstationsquelle verbinden",
+        "description": "Richte Home Assistant auf einen HTTP-Endpunkt, der Daten im dokumentierten Wetterstationen-JSON-Schema liefert. Jeder Server, der dieses Schema spricht, funktioniert — die Integration ist nicht an eine bestimmte Marke oder Region gebunden.",
+        "data": {
+          "url": "URL",
+          "scan_interval": "Aktualisierungsintervall (Sekunden)"
+        },
+        "data_description": {
+          "url": "Der genaue Endpunkt, der das Stations-JSON zurückgibt, z. B. {example_url}. Es wird nichts angehängt.",
+          "scan_interval": "Wie oft neue Daten abgerufen werden. Der Standardwert 1800 (30 Minuten) entspricht der üblichen Aktualisierungsrate der Quellen; kleinere Werte fragen nur häufiger einen Cache ab."
+        }
+      },
+      "stations": {
+        "title": "Stationen auswählen",
+        "description": "Diese Stationen meldet der Server aktuell. Wähle die aus, die zu Home Assistant hinzugefügt werden sollen — jede wird zu einem Gerät mit bis zu sechs Sensoren (Temperatur, Luftfeuchte, Luftdruck, Wind, Globalstrahlung, Niederschlag) und einer Wetter-Entität. Die Auswahl lässt sich später über „Konfigurieren“ ändern, ohne die Integration zu entfernen.",
+        "data": {
+          "stations": "Stationen"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Der Dienst ist unter dieser URL nicht erreichbar. Prüfe die Adresse, ob der Server läuft und ob Home Assistant ihn erreichen kann. Deine Eingaben unten wurden beibehalten.",
+      "no_stations": "Verbindung zur URL hergestellt, aber die Antwort enthielt keine Stationen. Stelle sicher, dass sie auf den Stationsdaten-Endpunkt zeigt und das dokumentierte Schema liefert."
+    },
+    "abort": {
+      "already_configured": "Diese URL ist bereits konfiguriert."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Stationen hinzufügen oder entfernen",
+        "description": "Diese Liste wird live vom Server neu geladen. Ändere, welche Stationen Entitäten haben, und bestätige — die Integration wird neu geladen. Entitäten einer entfernten Station werden „nicht verfügbar“ statt gelöscht und kommen zurück, wenn du die Station wieder hinzufügst.",
+        "data": {
+          "stations": "Stationen"
+        }
+      }
+    },
+    "abort": {
+      "cannot_connect": "Der Dienst war unter der konfigurierten URL nicht erreichbar, um die Stationsliste zu laden.",
+      "no_stations": "Der Dienst hat keine Stationen zurückgegeben."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "temperature": { "name": "Temperatur" },
+      "humidity": { "name": "Luftfeuchte" },
+      "pressure": { "name": "Luftdruck" },
+      "wind": { "name": "Wind" },
+      "solar": { "name": "Globalstrahlung" },
+      "rain": { "name": "Niederschlag" }
+    }
+  }
+}
